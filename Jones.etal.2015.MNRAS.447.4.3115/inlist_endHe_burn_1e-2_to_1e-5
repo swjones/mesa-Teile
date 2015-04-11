@@ -1,0 +1,181 @@
+&star_job
+      
+      mesa_data_dir = '/home/swj/mesa/mesa_code/mesa3709/data'
+      create_pre_main_sequence_model = .true.
+
+      change_net = .true.   
+      new_net_name = 'FULL_03.net'
+
+      set_rates_preference = .true. ! for use by net + rates modules
+      new_rates_preference = 2 
+         ! 1 = NACRE rates -- this is the default
+         ! 2 = jina reaclib rates -- to match jina where possible
+         
+      set_rate_c12ag = 'Kunz' ! empty string means ignore this control
+         ! one of 'NACRE', 'Buchmann', 'Kunz', or 'CF88'
+         ! note: original CF88 rate is actually multiplied by 1.7 as in Timmes' rates
+      set_rate_n14pg = 'Imbriani' ! empty string means ignore this control
+         ! one of 'NACRE', 'Imbriani', or 'CF88'
+      set_rate_3a = 'Fynbo' ! empty string means ignore this control
+         ! one of 'NACRE', 'Fynbo', or 'CF88'
+	 
+      use_se_output = .true.
+
+      log_columns_file = 'log_columns_SJ.list' 
+
+      change_v_flag = .true.
+      new_v_flag = .false.
+
+/ ! end of star_job namelist
+
+&controls
+      initial_mass = 15.0
+      initial_z = 0.02
+
+      mixing_length_alpha = 1.6 
+
+      operator_coupling_choice = 0
+          ! 0 -- fully coupled
+
+      min_timestep_limit = 1d-12 ! (seconds)
+
+      max_number_backups = -1 ! ignore if < 0
+      max_number_retries = -1 ! ignore if < 0
+      max_backups_in_a_row = 100
+         ! if do more than this many without a successful step, then terminate the run.
+
+! some logistics
+      max_model_number = 400000 ! negative means no maximum
+
+    ! lower limits on central mass fractions
+    ! stop when central abundance drops below this limit
+    ! can have up to num_xa_central_limits of these (see star_def for value)
+      xa_central_lower_limit_species(1) = 'he4' ! isotope name as defined in chem_def
+      xa_central_lower_limit(1) = 1d-5
+
+      photostep = 50
+      profile_interval = 50
+      max_num_profile_models = 10000 ! maximum number of saved profiles
+
+      log_cnt = 1
+      terminal_cnt = 10
+      write_header_frequency = 10
+
+! mesh
+      max_allowed_nz = 10000 ! maximum number of grid points allowed
+
+         mesh_dlog_pp_dlogP_extra = 0.15
+         mesh_dlog_cno_dlogP_extra = 0.15
+
+         mesh_dlog_3alf_dlogP_extra = 0.15
+         mesh_dlog_burn_c_dlogP_extra = 0.15
+
+         mesh_dlog_burn_n_dlogP_extra = 0.15
+         mesh_dlog_burn_o_dlogP_extra = 0.15
+
+         mesh_dlog_burn_ne_dlogP_extra = 0.08 ! more neon burning resolution
+
+         mesh_dlog_burn_na_dlogP_extra = 0.15
+         mesh_dlog_burn_mg_dlogP_extra = 0.15
+
+         mesh_dlog_cc_dlogP_extra = 0.15
+         mesh_dlog_co_dlogP_extra = 0.15
+
+         mesh_dlog_oo_dlogP_extra = 0.15   
+
+         mesh_dlog_burn_si_dlogP_extra = 0.15
+         mesh_dlog_burn_s_dlogP_extra = 0.15
+         mesh_dlog_burn_ar_dlogP_extra = 0.15
+         mesh_dlog_burn_ca_dlogP_extra = 0.15
+         mesh_dlog_burn_ti_dlogP_extra = 0.15
+         mesh_dlog_burn_cr_dlogP_extra = 0.15
+         mesh_dlog_burn_fe_dlogP_extra = 0.15
+
+         mesh_dlog_pnhe4_dlogP_extra = 0.15
+         mesh_dlog_other_dlogP_extra = 0.15
+         mesh_dlog_photo_dlogP_extra = 1
+
+
+         xa_function_species(1) = 'ne20'
+                xa_function_weight(1) = 20
+                xa_function_param(1) = 1d-2
+
+         xa_function_species(2) = 'si30'
+                xa_function_weight(2) = 20
+                xa_function_param(2) = 1d-2
+
+         xa_function_species(3) = 's34'
+                xa_function_weight(3) = 20
+                xa_function_param(3) = 1d-2
+
+         xa_function_species(4) = 'cr52'
+                xa_function_weight(4) = 20
+                xa_function_param(4) = 1d-2
+
+         xa_function_species(5) = 'fe56'
+                xa_function_weight(5) = 20
+                xa_function_param(5) = 1d-2
+
+         xa_function_species(6) = 'si28'
+                xa_function_weight(6) = 20
+                xa_function_param(6) = 1d-2
+
+         xa_function_species(7) = 's32'
+                xa_function_weight(7) = 20
+                xa_function_param(7) = 1d-2
+
+! timesteps
+! general
+      varcontrol_target = 1d-4
+
+      delta_lgRho_cntr_limit = 0.05  
+      delta_lgRho_cntr_hard_limit = 0.1
+   
+      delta_lgT_cntr_limit = 0.01  
+      delta_lgT_cntr_hard_limit = 0.02
+
+      delta_lgTeff_limit = 0.01  
+      delta_lgTeff_hard_limit = 0.02
+   
+      delta_lgL_limit = 0.1
+      delta_lgL_hard_limit = 0.2
+
+      dX_limit_min_X = 1d-5
+      dX_limit = 3d-5 
+
+  ! limits on max drop in abundance mass fraction from burning with possible mixing inflow
+  ! this considers both nuclear rate and offsetting effect of mixing inflow
+      dX_nuc_drop_min_X_limit = 1d-5 
+         !dX_nuc_drop_limit only for X > dX_nuc_drop_min_X_limit
+      !dX_nuc_drop_max_A_limit = 20 
+         !dX_nuc_drop_limit only for species with A <= dX_nuc_drop_max_A_limit
+      dX_nuc_drop_limit = 3.d-5 
+
+! Overshooting
+
+      overshoot_f_above_nonburn = 0.022
+      overshoot_f_below_nonburn = 0.022
+      overshoot_f_above_burn_h = 0.022
+      overshoot_f_below_burn_h = 0.005
+      overshoot_f_above_burn_he = 0.022
+      overshoot_f_below_burn_he = 0.005
+      overshoot_f_above_burn_z = 0.022
+      overshoot_f_below_burn_z = 0.005
+
+! atmosphere option
+      which_atm_option = 'simple_photosphere'
+       ! 'simple_photosphere'	
+          ! don't integrate, just estimate for tau=2/3
+
+! mass loss       
+      RGB_wind_scheme = 'Dutch'
+      AGB_wind_scheme = 'Dutch'
+      RGB_to_AGB_wind_switch = 1d-4
+      Dutch_wind_eta = 0.8
+
+! opacities
+      use_CO_enhanced_opacities = .true.
+      base_Z = 0.02
+
+/ ! end of controls namelist
+
