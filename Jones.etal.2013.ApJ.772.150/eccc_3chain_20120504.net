@@ -1,0 +1,564 @@
+      add_isos(
+         h1,
+         he3,
+         he4,
+         c12,  
+         c13, 
+         n13,
+         n14,
+         o16,
+         o20, 
+         f20,
+         f23, 
+         ne20,
+         ne21, 
+         ne22, 
+         ne23, 
+         ne24, 
+         na21, 
+         na22, 
+         na23, 
+         na24, 
+         na25, 
+         mg24,
+         mg25, 
+         mg27, 
+         al27, 
+         s35,
+         cl35,
+         ar36,
+         k39,
+         ca40,
+         ti44,
+         cr48,
+         fe52,
+         fe54,
+         fe56,
+         ni56,
+         cr56, 
+         neut,
+         prot,
+         ar37,
+         ar38,
+         ar39,
+         ar40,
+         ca41,
+         ca42,
+         ca43,
+         ca44,
+         ca45,
+         ca46,
+         ti45,
+         ti46,
+         ti47,
+         ti48,
+         ti49,
+         ti50,
+         cr49,
+         cr50,
+         cr51,
+         cr52,
+         cr53,
+         cr54,
+         fe53,
+         fe55,
+         fe57,
+         fe58,
+         fe60,
+         ni57,
+         ni58,
+         ni59,
+         ni60,
+         ni61,
+         ni62,
+         cl37,
+         k41,
+         k43,
+         sc45,
+         sc47,
+         sc49,
+         v49,
+         v51,
+         v53,
+         mn53,
+         mn55,
+         mn56,
+         mn57,
+         co57,
+         co59,
+         co60,
+         co61)
+
+      add_isos_and_reactions(al28,al29,al30,al31,al32,mg28,mg29,
+                             mg30,mg31,mg32,si28,si29,si30,si31,
+                             si32,si33,si34,p29,p30,p31,p32,p33,
+                             p34,p35,s32,s33,s34)
+         
+      add_reactions(
+         
+         rpp_to_he3,         ! p(p,e+nu)h2(p,g)he3       
+         rpep_to_he3,        ! p(e-p,nu)h2(p,g)he3     
+         r_he3_he3_to_h1_h1_he4,                ! he3(he3,2p)he4        
+         r34_pp2,            ! he4(he3,g)be7(e-,nu)li7(p,a)he4        
+         r34_pp3,            ! he4(he3,g)be7(p,g)b8(e+,nu)be8(,a)he4         
+         r_h1_he3_wk_he4,              ! he3(p,e+nu)he4     
+
+         !rc12_to_n14,        ! c12(p,g)n13(e+nu)c13(p,g)n14       
+         r_c12_pg_n13,        
+         r_n13_wk_c13,        
+         r_c13_pg_n14,        
+         r_c13_an_o16,        
+
+         rn14_to_c12,        ! n14(p,g)o15(e+nu)n15(p,a)c12       
+         rn14_to_o16,        ! n14(p,g)o15(e+nu)n15(p,g)o16       
+         ro16_to_n14,        ! o16(p,g)f17(e+nu)o17(p,a)n14       
+         
+         r_he4_he4_he4_to_c12,
+         r_c12_to_he4_he4_he4,
+
+         r_c12_ag_o16,
+         rc12ap_to_o16,      ! c12(a,p)n15(p,g)o16    
+
+         rn14ag_lite,        ! n14 + 1.5 alpha = ne20        
+
+         r_o16_ag_ne20,
+         ro16ap_to_ne20,     ! o16(a,p)f19(p,g)ne20    
+
+         r_ne20_ag_mg24,
+         r_ne20_ap_na23,      
+         r_na23_pa_ne20,      
+         r_na23_pg_mg24,      
+	 r_mg24_gp_na23,      
+
+!NeNa cycle:
+         r_ne20_pg_na21,
+         r_na21_wk_ne21,
+         r_ne21_pg_na22,
+         r_na22_wk_ne22,
+         r_ne22_pg_na23,
+  
+         r_ne20_ga_o16,
+  
+         r_mg24_ga_ne20,
+         
+         r_c12_c12_to_he4_ne20, 
+         r_c12_c12_to_h1_na23,  
+                   
+         r1216_to_mg24,        ! c12 + o16 -> mg24 + he4          
+         r1216_to_si28,        ! c12 + o16 -> si28         
+        
+         r1616a,               ! o16(o16,a)si28         
+	 r_o16_o16_to_h1_p31, 
+	 !r_p31_pa_si28,      
+         !r_p31_pg_s32,
+         r1616g,               ! o16(o16,g)s32         
+        
+         ! o16 => c12           
+         ro16gp_to_c12,        ! o16(g,p)n15(p,a)c12     
+         r_o16_ga_c12
+        
+         ! o16 => ne20           
+         ro16ap_to_ne20,       ! o16(a,p)f19(p,g)ne20     
+        
+         ! ne20 => o16           
+         rne20gp_to_o16,       ! ne20(g,p)f19(p,a)o16     
+         r_ne20_ga_o16
+        
+         ! mg24 => ne20           
+         r_mg24_ga_ne20
+                  
+         ! mg24 => si28           
+         r_mg24_ag_si28
+         r_mg24_ap_al27      
+         r_al27_pg_si28      
+         
+         ! si28 => mg24           
+         r_si28_gp_al27         
+         r_al27_pa_mg24         
+         r_si28_ga_mg24
+         
+         ! s32 => ar36
+         r_s32_ag_ar36
+         r_s32_ap_cl35      
+         r_cl35_pg_ar36     
+
+         ! ar36 => s32
+         r_ar36_gp_cl35      
+         r_cl35_pa_s32       
+         r_ar36_ga_s32
+         
+!EXTRA (p.g) reactions (chain branchings I think):
+         r_s34_pg_cl35
+         r_ar38_pg_k39
+
+         ! ar36 => ca40
+         r_ar36_ag_ca40
+         r_ar36_ap_k39       
+         r_k39_pg_ca40       
+              
+         ! ca40 => ar36
+         r_ca40_gp_k39     
+         r_k39_pa_ar36
+         r_ca40_ga_ar36
+            
+         ! ca40 => ti44
+         r_ca40_ag_ti44
+         rca40ap_to_ti44,   ! ca40(a,p)sc43(p,g)ti44 
+ 
+         ! ti44 => ca40
+         rti44gp_to_ca40,   ! ti44(g,p)sc43(p,a)ca40     
+         r_ti44_ga_ca40
+      
+         ! ti44 => cr48
+         r_ti44_ag_cr48
+         rti44ap_to_cr48,   ! ti44(a,p)v47(p,g)cr48
+         
+         ! cr48 => ti44
+         rcr48gp_to_ti44,   ! cr48(g,p)v47(p,a)ti44
+         r_cr48_ga_ti44
+         
+         ! cr48 => fe52
+         r_cr48_ag_fe52
+         rcr48ap_to_fe52,   ! cr48(a,p)mn51(p,g)fe52
+            
+         ! fe52 => cr48
+         rfe52gp_to_cr48,   ! fe52(g,p)mn51(p,a)cr48
+         r_fe52_ga_cr48
+         
+         r_fe52_ag_ni56
+         r_ni56_ga_fe52
+
+         rfe52ap_to_ni56,          ! fe52(a,p)co55(p,g)ni56
+         rni56gp_to_fe52,          ! ni56(g,p)co55(p,a)fe52
+  
+         rni56ec_to_fe56,          ! ni56 + 2 e- => fe56
+         
+         rni56gprot_to_fe54,       ! ni56(g,prot)co55(g,prot)fe54
+         rfe52aprot_to_fe54,       ! fe52(a,prot)co55(g,prot)fe54
+         rfe52aprot_to_ni56,       ! fe52(a,prot)co55(prot,g)ni56
+         rni56gprot_to_fe52,       ! ni56(g,prot)co55(prot,a)fe52
+       
+         rprot_to_neut,            ! prot(e-nu)neut
+         rneut_to_prot,            ! neut(e+nu)prot
+
+         rn14gc12,                 ! n14 => c12 + neut + prot
+
+         rhe4_breakup,             ! he4(g,neut)he3(g,prot)h2(g,neut)prot
+         rhe4_rebuild,             ! prot(neut,g)h2(neut,g)h3(prot,g)he4
+
+         rfe54prot_to_fe52,        ! fe54(prot,g)co55(prot,a)fe52
+         rfe54prot_to_ni56,        ! fe54(prot,g)co55(prot,g)ni56
+  
+         rfe52neut_to_fe54,        ! fe52(neut,g)fe53(neut,g)fe54
+         rfe54g_to_fe52,           ! fe54(g,neut)fe53(g,neut)fe52
+  
+         rfe54ng_to_fe56,          ! fe54(neut,g)fe55(neut,g)fe56
+         rfe56gn_to_fe54,          ! fe56(g,neut)fe55(g,neut)fe54
+
+!Electron Captures:
+         r_ne20_wk_f20      
+         r_f20_wk-minus_ne20
+         r_mg24_wk_na24     
+         r_na24_wk-minus_mg24
+         r_na24_wk_ne24     
+         r_ne24_wk-minus_na24
+         r_na23_wk_ne23     
+         r_ne23_wk-minus_na23
+         r_ne23_wk_f23      
+         r_f23_wk-minus_ne23
+         r_f20_wk_o20       
+         r_al27_wk_mg27       
+         r_mg27_wk-minus_al27 
+         r_mg24_ng_mg25       
+         r_mg25_wk_na25       
+         r_na25_wk-minus_mg25 
+
+         r_cl35_wk_s35
+         r_s35_pn_cl35
+         r_s35_gn_s34
+         r_s35_gp_p34
+         r_ar37_wk_cl37
+
+         r_mn55_ng_mn56
+         r_mn56_gn_mn55
+         r_mn56_ng_mn57
+         r_mn57_gn_mn56
+         r_fe56_wk_mn56
+         r_mn56_wk-minus_fe56
+         r_mn56_wk_cr56
+         r_cr56_wk-minus_mn56
+
+         r_ni60_wk_co60
+         r_co60_wk-minus_ni60
+         r_co60_wk_fe60
+         r_fe60_wk-minus_co60
+
+         r_ni59_gn_ni58
+         r_ni58_ng_ni59
+         r_ni56_ng_ni57
+         r_ni57_gn_ni56
+
+!neutron-rich:
+
+         r_s34_ag_ar38
+         r_ar38_ga_s34
+         r_s34_ap_cl37
+         r_cl37_pa_s34
+         r_cl37_pg_ar38
+         r_ar38_gp_cl37
+         r_s34_an_ar37
+         r_ar37_na_s34
+         r_ar37_ng_ar38
+         r_ar38_gn_ar37
+
+         r_ar38_ng_ar39
+         r_ar39_gn_ar38
+         r_ar39_ng_ar40
+         r_ar40_gn_ar39
+
+         r_ar38_ag_ca42
+         r_ca42_ga_ar38
+         r_ar38_ap_k41
+         r_k41_pa_ar38
+         r_k41_pg_ca42
+         r_ca42_gp_k41
+         r_ar38_an_ca41
+         r_ca41_na_ar38
+         r_ca41_ng_ca42
+         r_ca42_gn_ca41
+
+         r_ar40_ag_ca44
+         r_ca44_ga_ar40
+         r_ar40_ap_k43
+         r_k43_pa_ar40
+         r_k43_pg_ca44
+         r_ca44_gp_k43
+         r_ar40_an_ca43
+         r_ca43_na_ar40
+         r_ca43_ng_ca44
+         r_ca44_gn_ca43
+
+         r_ca42_ng_ca43
+         r_ca43_gn_ca42
+         r_ca43_ng_ca44
+         r_ca44_gn_ca43
+         r_ca44_ng_ca45
+         r_ca45_gn_ca44
+         r_ca45_ng_ca46
+         r_ca46_gn_ca45
+
+         r_ca42_ag_ti46
+         r_ti46_ga_ca42
+         r_ca42_ap_sc45
+         r_sc45_pa_ca42
+         r_sc45_pg_ti46
+         r_ti46_gp_sc45
+         r_ca42_an_ti45
+         r_ti45_na_ca42
+         r_ti45_ng_ti46
+         r_ti46_gn_ti45
+
+         r_ca44_ag_ti48
+         r_ti48_ga_ca44
+         r_ca44_ap_sc47
+         r_sc47_pa_ca44
+         r_sc47_pg_ti48
+         r_ti48_gp_sc47
+         r_ca44_an_ti47
+         r_ti47_na_ca44
+         r_ti47_ng_ti48
+         r_ti48_gn_ti47
+
+         r_ca46_ag_ti50
+         r_ti50_ga_ca46
+         r_ca46_ap_sc49
+         r_sc49_pa_ca46
+         r_sc49_pg_ti50
+         r_ti50_gp_sc49
+         r_ca46_an_ti49
+         r_ti49_na_ca46
+         r_ti49_ng_ti50
+         r_ti50_gn_ti49
+
+         r_ti46_ag_cr50
+         r_cr50_ga_ti46
+         r_ti46_ap_v49
+         r_v49_pa_ti46
+         r_v49_pg_cr50
+         r_cr50_gp_v49
+         r_ti46_an_cr49
+         r_cr49_na_ti46
+         r_cr49_ng_cr50
+         r_cr50_gn_cr49
+
+         r_ti48_ag_cr52
+         r_cr52_ga_ti48
+         r_ti48_ap_v51
+         r_v51_pa_ti48
+         r_v51_pg_cr52
+         r_cr52_gp_v51
+         r_ti48_an_cr51
+         r_cr51_na_ti48
+         r_cr51_ng_cr52
+         r_cr52_gn_cr51
+
+         r_ti50_ag_cr54
+         r_cr54_ga_ti50
+         r_ti50_ap_v53
+         r_v53_pa_ti50
+         r_v53_pg_cr54
+         r_cr54_gp_v53
+         r_ti50_an_cr53
+         r_cr53_na_ti50
+         r_cr53_ng_cr54
+         r_cr54_gn_cr53
+
+         r_cr50_ag_fe54
+         r_fe54_ga_cr50
+         r_cr50_ap_mn53
+         r_mn53_pa_cr50
+         r_mn53_pg_fe54
+         r_fe54_gp_mn53
+         r_cr50_an_fe53
+         r_fe53_na_cr50
+         r_fe53_ng_fe54
+         r_fe54_gn_fe53
+
+         r_cr52_ag_fe56
+         r_fe56_ga_cr52
+         r_cr52_ap_mn55
+         r_mn55_pa_cr52
+         r_mn55_pg_fe56
+         r_fe56_gp_mn55
+         r_cr52_an_fe55
+         r_fe55_na_cr52
+         r_fe55_ng_fe56
+         r_fe56_gn_fe55
+
+         r_cr54_ag_fe58
+         r_fe58_ga_cr54
+         r_cr54_ap_mn57
+         r_mn57_pa_cr54
+         r_mn57_pg_fe58
+         r_fe58_gp_mn57
+         r_cr54_an_fe57
+         r_fe57_na_cr54
+         r_fe57_ng_fe58
+         r_fe58_gn_fe57
+
+         r_fe54_ag_ni58
+         r_ni58_ga_fe54
+         r_fe54_ap_co57
+         r_co57_pa_fe54
+         r_co57_pg_ni58
+         r_ni58_gp_co57
+         r_fe54_an_ni57
+         r_ni57_na_fe54
+         r_ni57_ng_ni58
+         r_ni58_gn_ni57
+
+         r_fe56_ag_ni60
+         r_ni60_ga_fe56
+         r_fe56_ap_co59
+         r_co59_pa_fe56
+         r_co59_pg_ni60
+         r_ni60_gp_co59
+         r_fe56_an_ni59
+         r_ni59_na_fe56
+         r_ni59_ng_ni60
+         r_ni60_gn_ni59
+
+         r_fe58_ag_ni62
+         r_ni62_ga_fe58
+         r_fe58_ap_co61
+         r_co61_pa_fe58
+         r_co61_pg_ni62
+         r_ni62_gp_co61
+         r_fe58_an_ni61
+         r_ni61_na_fe58
+         r_ni61_ng_ni62
+         r_ni62_gn_ni61
+
+         ! auxiliaries -- used only for computing rates of other reactions
+         
+         r1616p_aux,               ! o16(o16,p)p31         
+         ro16gp_aux,               ! o16(g,p)n15              
+         rn15pa_aux,               !         n15(p,a)c12         
+         rn15pg_aux,
+         ro16ap_aux,               ! o16(a,p)f19                 
+         rf19pg_aux,               !         f19(p,g)ne20           
+         rne20gp_aux,              ! ne20(g,p)f19                
+         rf19pa_aux,               !          f19(p,a)o16           
+         rmg24ap_aux,              ! mg24(a,p)al27
+         ral27pg_aux,              !          al27(p,g)si28
+         rsi28gp_aux,              ! si28(g,p)al27
+         ral27pa_aux,              !          al27(p,a)mg24
+         rsi28ap_aux,              ! si28(a,p)p31
+         rp31pg_aux,               !          p31(p,g)s32
+         rs32gp_aux,               ! s32(g,p)p31
+         rp31pa_aux,               !         p31(p,a)si28
+         rs32ap_aux,               ! s32(a,p)cl35
+         rcl35pg_aux,              !         cl35(p,g)ar36
+         rar36gp_aux,              ! ar36(g,p)cl35
+         rcl35pa_aux,              !          cl35(p,a)s32
+         rar36ap_aux,              ! ar36(a,p)k39
+         rk39pg_aux,               !          k39(p,g)ca40
+         rca40gp_aux,              ! ca40(g,p)k39
+         rk39pa_aux,               !          k39(p,a)ar36
+         rca40ap_aux,              ! ca40(a,p)sc43
+         rsc43pg_aux,              !          sc43(p,g)ti44
+         rti44gp_aux,              ! ti44(g,p)sc43
+         rsc43pa_aux,              !          sc43(p,a)ca40
+         rti44ap_aux,              ! ti44(a,p)v47
+         rv47pg_aux,               !          v47(p,g)cr48
+         rcr48gp_aux,              ! cr48(g,p)v47
+         rv47pa_aux,               !          v47(p,a)ti44
+         rti44ap_aux,              ! ti44(a,p)v47
+         rv47pg_aux,               !          v47(p,g)cr48
+         rcr48gp_aux,              ! cr48(g,p)v47
+         rv47pa_aux,               !          v47(p,a)ti44
+         rcr48ap_aux,              ! cr48(a,p)mn51
+         rmn51pg_aux,              !          mn51(p,g)fe52
+         rfe52gp_aux,              ! fe52(g,p)mn51
+         rmn51pa_aux,              !          mn51(p,a)cr48
+         rfe52ap_aux,              ! fe52(a,p)co55
+         rco55pg_aux,              !          co55(p,g)ni56
+         rni56gp_aux,              ! ni56(g,p)co55
+         rco55pa_aux,              !          co55(p,a)fe52
+         rfe52aprot_aux,           ! fe52(a,prot)co55 
+         rco55prota_aux,           !             co55(prot,a)fe52
+         rfe54protg_aux,           ! fe54(prot,g)co55 
+         rco55gprot_aux,           !             co55(g,prot)fe54
+         rni56gprot_aux,           ! ni56(g,prot)co55
+         rco55protg_aux,           !             co55(prot,g)ni56 
+         rhe4g_neut_aux,           ! he4(g,neut)he3
+         rhe3gprot_aux,            !            he3(g,prot)h2
+         rh2g_neut_aux,            !                       h2(g,neut)prot
+         rprot_neutg_aux,          ! prot(neut,g)h2
+         rh2_protg_aux,            !             h2(prot,g)he3
+         rhe3_neutg_aux,           !                       he3(neut,g)he4
+         rfe52ng_aux,              ! fe52(neut,g)fe53 
+         rfe53gn_aux,              !             fe53(g,neut)fe52 
+         rfe53ng_aux,              ! fe53(neut,g)fe54 
+         rfe54gn_aux,              !             fe54(g,neut)fe53
+         rfe54ng_aux,              ! fe54(neut,g)fe55 
+         rfe55gn_aux,              !             fe55(g,neut)fe54 
+         rfe55ng_aux,              ! fe55(neut,g)fe56 
+         rfe56gn_aux,              !             fe56(g,neut)fe55
+         rbe7ec_li7_aux,
+         rbe7pg_b8_aux,
+         rn14pg_aux,
+         rn15pg_aux,
+         rn15pa_aux,
+         rn15pg_aux,
+         rn15pa_aux,
+         ro16ap_aux,
+         rf19pg_aux,
+         rf19pa_aux,
+         rna23pg_aux,
+         rna23pa_aux
+         )     
+  
+
+     
+     
