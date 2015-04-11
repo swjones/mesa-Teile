@@ -10,9 +10,13 @@ _Monthly Notices of the Royal Astronomical Society, 447, 4, 3115_
 
 ---
 
-######Files:
+###### Inlist files:
 
-|`FULL_03.net` | network file |
-|`inlist_H_He_burn_1e-2`| inlist file for evolution from pre-MS until central helium mass fraction falls below $$$10^{-2}$$$ |
-|`inlist_endHe_burn_1e-2_to_1e-5`| inlist file for the remainder of core He-burning |
+`inlist_H_He_burn_1e-2` : inlist file for evolution from pre-MS
+until central helium mass fraction falls below 1.e-2
 
+`inlist_endHe_burn_1e-2_to_1e-5` : inlist file for the remainder of core He-burning
+
+###### Network files:
+
+`FULL_03.net` : network file
