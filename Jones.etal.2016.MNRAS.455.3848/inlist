@@ -1,0 +1,128 @@
+&star_job
+      
+      mesa_data_dir = '/shyne/swj/mesa/mesa_code/mesa3709/data'
+      create_pre_main_sequence_model = .true.
+
+      change_net = .true.      
+      new_net_name = 'sagb_SJ.net'
+
+      initial_zfracs = 2 ! GN93
+
+      set_rates_preference = .true. ! for use by net + rates modules
+      new_rates_preference = 1 
+         ! 1 = NACRE rates -- this is the default
+         ! 2 = jina reaclib rates -- to match jina where possible
+         
+      log_columns_file = 'log_columns.list' 
+
+/ ! end of star_job namelist
+
+&controls
+
+      initial_mass = 7.0
+      initial_z = 1.0E-04
+
+      mixing_length_alpha = 1.73
+
+
+! some logistics
+      max_model_number = 1000000 ! negative means no maximum
+
+      photostep = 50
+      profile_interval = 100
+      max_num_profile_models = 100 ! maximum number of saved profiles
+
+      log_cnt = 1
+      terminal_cnt = 10
+      write_header_frequency = 10
+
+! mesh
+      max_allowed_nz = 5000 ! maximum number of grid points allowed
+
+! resolve the C13 pockets 
+      xa_function_species(1) = 'h1'  ! name of nuclide as defined in chem_def
+        xa_function_weight(1) = 5
+        xa_function_param(1) = 3d-4
+      xa_function_species(2) = 'he4'  ! name of nuclide as defined in chem_def
+        xa_function_weight(2) = 5
+        xa_function_param(2) = 1d-2
+      xa_function_species(3) = 'c13'  ! name of nuclide as defined in chem_def
+        xa_function_weight(3) = 4
+        xa_function_param(3) = 1d-3
+      xa_function_species(4) = 'n14'  ! name of nuclide as defined in chem_def
+        xa_function_weight(4) = 3
+        xa_function_param(4) = 1d-2
+
+! timesteps
+! general
+      varcontrol_target = 1d-4
+        ! this is the target value for relative variation in the structure from one model to the next.
+        ! the default timestep adjustment is to increase or reduce the timestep depending on whether
+        ! the actual variation was smaller or greater than this value.
+
+      delta_lgRho_cntr_limit = 0.05  
+      delta_lgRho_cntr_hard_limit = 0.1
+   
+      delta_lgT_cntr_limit = 0.01  
+      delta_lgT_cntr_hard_limit = 0.02
+
+      delta_lgTeff_limit = 0.01  
+      delta_lgTeff_hard_limit = 0.02
+   
+      delta_lgL_limit = 0.1
+      delta_lgL_hard_limit = 0.2
+
+! TP
+      delta_lgL_He_limit = 0.01 ! for TP resolution
+      !delta_lgL_He_hard_limit = 0.05
+      lgL_He_burn_min = 2.0 ! ignore changes in lgL_He if value 
+      		            ! is less than this
+
+! DUP
+      DUP_varcontrol_factor = 1.0
+        ! multiply varcontrol_target by this when TP_state == 2, i.e., during dredge up during thermal pulse
+      
+! time step controls for interpulse
+
+      dH_limit_min_H = 1.e-2
+      dH_limit = 0.1
+
+      dH_div_H_limit_min_H = 1d-5
+      dH_div_H_limit = 0.5
+
+! Overshooting
+      mass_for_overshoot_full_on = 1.8 ! Msun units
+      mass_for_overshoot_full_off = 1.1 ! Msun units
+
+      overshoot_f_above_nonburn = 0.014
+      overshoot_f_below_nonburn = 0.008 ! parameter study 
+      overshoot_f_above_burn_h = 0.014
+      overshoot_f_below_burn_h  = 0.008 ! parameter study 
+      overshoot_f_above_burn_he = 0.014
+      overshoot_f_below_burn_he = 0.002 ! parameter study 
+      overshoot_f_above_burn_z = 0.014
+      overshoot_f_below_burn_z = 0.014    
+! C13 pocket      
+      overshoot_below_noburn_factor = 1. !  set to 1. during TP-SAGB phase (0.3 before)
+! He-shell flash convection zone
+      ovr_below_burn_he_factor = 1. ! set to 1. during TP-SAGB phase (0.143 before)
+
+
+! atmosphere option
+      which_atm_option = 'simple_photosphere'   ! don't integrate
+      		       	 			! just estimate photosphere Pgas
+! mass loss       
+      RGB_wind_scheme = 'Reimers'
+      AGB_wind_scheme = 'Blocker'
+      RGB_to_AGB_wind_switch = 1d-4
+      Reimers_wind_eta = 0.5d0  
+      Blocker_wind_eta = 0.0003d0  
+
+! opacities
+      use_CO_enhanced_opacities = .true.
+      base_Z = 1.0E-04
+      base_fC = 0.1712 ! base value of XC/Z
+      base_fO = 0.4812 ! base value of XO/Z
+
+/ ! end of controls namelist
+
