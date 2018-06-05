@@ -11,6 +11,7 @@ _The Astrophysical Journal, 772, 150_
 
 `inlist_8.75` : inlist file for the 8.75 M$$_\odot$$ model  
 `inlist_8.8` : inlist file for the 8.8 M$$_\odot$$ model  
+and so on...
 
 ###### Network files:
 
